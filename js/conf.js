@@ -1,6 +1,6 @@
 
 
-Player = function (phaser) {
+let Player = function (phaser) {
 
     phaser.anims.create({
         key: 'witch_left',
@@ -16,7 +16,7 @@ Player = function (phaser) {
         repeat: -1
     });
 
-    this.pSprite = phaser.physics.add.sprite(400, 300, 'witch');
+    this.pSprite = phaser.physics.add.sprite(130, 300, 'witch');
     this.pSprite.setCollideWorldBounds(true);
 
     Player.prototype.goLeft = function () {
