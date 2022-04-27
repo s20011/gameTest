@@ -36,7 +36,6 @@ class Playing extends Phaser.Scene {
 
         MyObj.coins = this.physics.add.group();
         MyObj.coins.create(670, 0, 'coin');
-        //MyObj.block.setAlpha(0)
 
 
         //Playerと地面は衝突する関係にあることを設定
@@ -44,12 +43,21 @@ class Playing extends Phaser.Scene {
         this.physics.add.collider(MyObj.player.pSprite, MyObj.block);
         //coinと地面・Playerは衝突する関係にあることを設定
         this.physics.add.collider(MyObj.grounds, MyObj.coins);
-        this.physics.add.collider(MyObj.player.pSprite, MyObj.coins);
+        this.physics.add.collider(
+            MyObj.player.pSprite, MyObj.coins,
+            (p, c) => {
+                //コインとplayerが衝突したらコインが消える
+                c.destroy();
+            }, null , this
+        );
+
 
         info = this.add.text(10, 10, '', {font: '48px Arial', fill: '#000000'});
         timer = this.time.addEvent({
             delay: 3000, callback: this.blockAlpha, callbackScope: this
         });
+
+
     }
 
     update = function() {
@@ -76,6 +84,10 @@ class Playing extends Phaser.Scene {
 
     blockAlpha = function () {
         MyObj.block.setAlpha(0)
+    }
+
+    hit = function () {
+        MyObj.coins.destroy()
     }
 }
 
