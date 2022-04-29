@@ -86,9 +86,6 @@ class Playing extends Phaser.Scene {
         MyObj.block.setAlpha(0)
     }
 
-    hit = function () {
-        MyObj.coins.destroy()
-    }
 }
 
 let MyObj = {}
